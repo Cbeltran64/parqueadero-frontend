@@ -1,0 +1,57 @@
+/* SidebarMenu.css */
+
+/* Estilos generales del sidebar */
+.sidebar-menu {
+    background-color: #333333;
+    min-height: 100vh;
+    color: white;
+  }
+  
+  /* Logo */
+  .sidebar-menu .logo {
+    padding: 0 1rem;
+  }
+  
+  /* Título del menú */
+  .sidebar-menu .menu-heading {
+    padding: 0 1rem;
+  }
+  
+  /* Opciones del menú */
+  .sidebar-menu .nav-link {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+  }
+  
+  .sidebar-menu .nav-link:hover {
+    opacity: 0.8;
+  }
+  
+  .sidebar-menu .nav-link i {
+    font-size: 24px;
+  }
+  
+  .sidebar-menu .nav-link span {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  /* Botón de cierre de sesión */
+  .sidebar-menu .btn {
+    margin-bottom: 1rem;
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 767px) {
+    .sidebar-menu {
+      min-height: auto;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .sidebar-menu {
+      width: 100%;
+    }
+  }
+  
