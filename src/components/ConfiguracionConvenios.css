@@ -1,0 +1,27 @@
+:root {
+    --primary-color: #140055;
+    --secondary-color: #582AFF;
+    --accent-color: #15B0F6;
+    --highlight-color: #06DCC2;
+  }
+  
+  .table th {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+  
+  .btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  
+  .btn-danger {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-success {
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+  }
+  

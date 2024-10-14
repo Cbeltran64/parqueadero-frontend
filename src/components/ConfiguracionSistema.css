@@ -1,0 +1,30 @@
+:root {
+    --primary-color: #140055;
+    --secondary-color: #582AFF;
+    --accent-color: #15B0F6;
+    --highlight-color: #06DCC2;
+  }
+  
+  .config-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .config-button {
+    width: 80%;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    color: white;
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .config-button:hover {
+    background: var(--accent-color);
+  }
+  

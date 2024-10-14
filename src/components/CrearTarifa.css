@@ -1,0 +1,24 @@
+/* Mantener las variables de color */
+:root {
+    --primary-color: #140055;
+    --secondary-color: #582AFF;
+    --accent-color: #15B0F6;
+    --highlight-color: #06DCC2;
+  }
+  
+  .form-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .btn-success {
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+  }
+  
+  .btn-danger {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  

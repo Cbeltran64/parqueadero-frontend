@@ -1,59 +1,68 @@
 // src/components/SidebarMenu.js
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode'; // Importación correcta
+import jwt_decode from 'jwt-decode';
+import axiosInstance from '../services/authService'; // Ruta actualizada
 import './SidebarMenu.css';
 
 export default function SidebarMenu() {
   const navigate = useNavigate();
+  const [permissions, setPermissions] = useState({
+    gestion_usuarios: false,
+    configuracion_sistema: false,
+    generacion_reportes: false,
+    sistema: false,
+  });
 
-  // Obtener el token desde localStorage
-  const token = localStorage.getItem('token');
+  useEffect(() => {
+    const fetchPermissions = async () => {
+      try {
+        const response = await axiosInstance.get('/api/users/menu-permissions/');
+        setPermissions(response.data);
+      } catch (error) {
+        console.error('Error al obtener los permisos del usuario:', error);
+      }
+    };
 
-  // Decodificar el token para obtener el rol del usuario
-  let role = '';
-  if (token) {
-    const decoded = jwtDecode(token); // Uso de jwtDecode
-    role = decoded.role; // Asegúrate de que 'role' está incluido en el token JWT
-  }
+    fetchPermissions();
+  }, []);
 
-  // Definir las opciones del menú según el rol del usuario
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/');
+  };
+
   const menuOptions = [
     {
       label: 'Gestión de Usuarios',
       icon: 'fas fa-users',
       link: '/gestion-usuarios',
-      roles: ['admin', 'other_user'],
+      permission: permissions.gestion_usuarios,
       backgroundColor: '#6902FF',
     },
     {
       label: 'Configuración de Sistema',
       icon: 'fas fa-cogs',
       link: '/configuracion-sistema',
-      roles: ['admin', 'other_user'],
+      permission: permissions.configuracion_sistema,
       backgroundColor: '#15B0F6',
     },
     {
       label: 'Generación de Reportes',
       icon: 'fas fa-file-alt',
       link: '/reportes',
-      roles: ['admin', 'operator', 'other_user'],
+      permission: permissions.generacion_reportes,
       backgroundColor: '#06DCC2',
     },
     {
       label: 'Sistema',
       icon: 'fas fa-desktop',
       link: '/sistema',
-      roles: ['admin', 'operator', 'other_user'],
+      permission: permissions.sistema,
       backgroundColor: '#140055',
     },
   ];
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
-  };
 
   return (
     <div className="sidebar-menu d-flex flex-column align-items-center py-3">
@@ -63,7 +72,7 @@ export default function SidebarMenu() {
       <h6 className="menu-heading text-white text-center mb-4">Menú</h6>
       <ul className="nav flex-column w-100">
         {menuOptions
-          .filter((option) => option.roles.includes(role))
+          .filter((option) => option.permission)
           .map((option, index) => (
             <li className="nav-item mb-3" key={index}>
               <Link

@@ -1,0 +1,30 @@
+/* Mantener las variables de color */
+:root {
+  --primary-color: #140055;
+  --secondary-color: #582AFF;
+  --accent-color: #15B0F6;
+  --highlight-color: #06DCC2;
+}
+
+/* Estilo para el contenedor principal */
+.main-content {
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.main-content::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Chrome/Safari/Webkit */
+}
+
+/* Asegurarse de que el formulario tenga suficiente espacio */
+.main-content form {
+  padding-bottom: 2rem;
+}
+
+/* Opcional: Ocultar la barra de desplazamiento horizontal si aparece */
+.main-content {
+  overflow-x: hidden;
+}
