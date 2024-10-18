@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SidebarMenu from './SidebarMenu';
+import SidebarMenu from '../SidebarMenu';
 import './ConfiguracionSistema.css';
 
 export default function ConfiguracionSistema() {

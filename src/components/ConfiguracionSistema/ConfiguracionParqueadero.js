@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../services/authService';
+import axiosInstance from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
-import SidebarMenu from './SidebarMenu';
+import SidebarMenu from '../SidebarMenu';
 import './ConfiguracionParqueadero.css';
 
 export default function ConfiguracionParqueadero() {

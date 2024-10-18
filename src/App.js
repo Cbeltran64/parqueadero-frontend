@@ -1,14 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+// Importar componentes
 import Dashboard from './components/Dashboard';
 import Login from './components/Login/Login';
-import ConfiguracionSistema from './components/ConfiguracionSistema';
-import ConfiguracionParqueadero from './components/ConfiguracionParqueadero';
-import ConfiguracionTarifas from './components/ConfiguracionTarifas';
-import ConfiguracionConvenios from './components/ConfiguracionConvenios';
-import CrearTarifa from './components/CrearTarifa';
-import CrearConvenio from './components/CrearConvenio';
-// Importa los demás componentes según sea necesario
+import ConfiguracionSistema from './components/ConfiguracionSistema/ConfiguracionSistema';
+import ConfiguracionParqueadero from './components/ConfiguracionSistema/ConfiguracionParqueadero';
+import ConfiguracionTarifas from './components/ConfiguracionSistema/ConfiguracionTarifas';
+import ConfiguracionConvenios from './components/ConfiguracionSistema/ConfiguracionConvenios';
+import CrearTarifa from './components/ConfiguracionSistema/CrearTarifa';
+import CrearConvenio from './components/ConfiguracionSistema/CrearConvenio';
+import EditarTarifa from './components/ConfiguracionSistema/EditarTarifa';
+import EditarConvenio from './components/ConfiguracionSistema/EditarConvenio';
+import UserManagement from './components/GestionUsuarios/UserManagement';
+import CrearUsuario from './components/GestionUsuarios/CrearUsuario';
+import ParkingManagement from './components/ParkingManagement'; 
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -75,7 +81,47 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* Agrega las demás rutas para editar tarifas y convenios */}
+        <Route
+          path="/editar-tarifa/:id"
+          element={
+            <ProtectedRoute>
+              <EditarTarifa />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/editar-convenio/:id"
+          element={
+            <ProtectedRoute>
+              <EditarConvenio />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/gestion-usuarios"
+          element={
+            <ProtectedRoute>
+              <UserManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/crear-usuario"
+          element={
+            <ProtectedRoute>
+              <CrearUsuario />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/sistema"
+          element={
+            <ProtectedRoute>
+              <ParkingManagement />
+            </ProtectedRoute>
+          }
+        />
+        
       </Routes>
     </Router>
   );

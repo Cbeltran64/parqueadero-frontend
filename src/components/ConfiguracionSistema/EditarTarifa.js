@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../services/authService';
-import { useNavigate } from 'react-router-dom';
-import SidebarMenu from './SidebarMenu';
-import './CrearTarifa.css';
+import axiosInstance from '../../services/authService';
+import { useNavigate, useParams } from 'react-router-dom';
+import SidebarMenu from '../SidebarMenu';
+import './EditarTarifa.css';
 
-export default function CrearTarifa() {
+export default function EditarTarifa() {
   const [formData, setFormData] = useState({
     nombre_tarifa: '',
     vehicle_type: '',
@@ -14,8 +14,22 @@ export default function CrearTarifa() {
   const [convenios, setConvenios] = useState([]);
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const { id } = useParams(); // Obtener el ID de la tarifa desde la URL
 
   useEffect(() => {
+    const fetchTarifa = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/tariffs/${id}/`);
+        const data = response.data;
+        setFormData({
+          ...data,
+          convenio: data.convenio || '',
+        });
+      } catch (error) {
+        console.error('Error al obtener la tarifa:', error);
+      }
+    };
+
     const fetchConvenios = async () => {
       try {
         const response = await axiosInstance.get('/api/convenios/');
@@ -25,8 +39,9 @@ export default function CrearTarifa() {
       }
     };
 
+    fetchTarifa();
     fetchConvenios();
-  }, []);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,13 +55,13 @@ export default function CrearTarifa() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('/api/tariffs/', formData);
-      setMessage('Tarifa creada correctamente.');
+      await axiosInstance.put(`/api/tariffs/${id}/`, formData);
+      setMessage('Tarifa actualizada correctamente.');
       // Redirigir a la lista de tarifas
       navigate('/configuracion-tarifas');
     } catch (error) {
-      console.error('Error al crear la tarifa:', error);
-      setMessage('Error al crear la tarifa.');
+      console.error('Error al actualizar la tarifa:', error);
+      setMessage('Error al actualizar la tarifa.');
     }
   };
 
@@ -60,7 +75,7 @@ export default function CrearTarifa() {
 
         {/* Main content */}
         <main className="col-12 col-md-9 col-lg-10 px-4 main-content">
-          <h1 className="mt-4">Crear Tarifa</h1>
+          <h1 className="mt-4">Editar Tarifa</h1>
           <form onSubmit={handleSubmit} className="mt-4">
             {/* Campos del formulario */}
             <div className="mb-3">
@@ -110,7 +125,7 @@ export default function CrearTarifa() {
               <select
                 className="form-control"
                 name="convenio"
-                value={formData.convenio}
+                value={formData.convenio || ''}
                 onChange={handleChange}
               >
                 <option value="">Sin Convenio</option>
@@ -127,8 +142,8 @@ export default function CrearTarifa() {
 
             {/* Botones */}
             <div className="form-buttons">
-              <button type="submit" className="btn btn-success">
-                Crear
+              <button type="submit" className="btn btn-primary">
+                Actualizar
               </button>
               <button type="button" className="btn btn-danger" onClick={handleVolver}>
                 Volver
